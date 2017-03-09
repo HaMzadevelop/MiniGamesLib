@@ -12,7 +12,8 @@ public class MiniGamesLib extends JavaPlugin{
   @Override
   public void onEnable(){
       getConfig().options().copyDefaults();
-      saveDefaultConfig(); 
+      saveDefaultConfig();
+      registerEvents();
       ConsoleChat.info("&aEnabled!");
   }
   
