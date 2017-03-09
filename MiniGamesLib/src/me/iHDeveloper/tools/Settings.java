@@ -1,6 +1,9 @@
 package me.iHDeveloper.tools;
 
 import java.io.File;
+
+import me.iHDeveloper.debug.Debug;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 
 
@@ -14,7 +17,8 @@ public class Settings {
             return config;
         }
         catch(Exception ex){
-            
+        	ex.printStackTrace();
+        	Debug.err(ex.getMessage());
         }
         return null;
     }
