@@ -3,9 +3,12 @@ package me.iHDeveloper.command;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 import me.iHDeveloper.MiniGamesLib;
 import me.iHDeveloper.debug.Debug;
 import me.iHDeveloper.player.Player;
+import me.iHDeveloper.player.PlayerChat;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -26,7 +29,7 @@ public class CommandManager implements Listener{
         Debug.info("The "+p.getName()+" enter command "+message);
         message = message.substring(0, message.length());
         List<String> args = new LinkedList<String>(Arrays.asList(message.split(" ")));
-        if(args.size() > 1){
+        if(args.size() > 0){
             String name = args.get(0);
             args.remove(0);
             Command wanted = null;
@@ -70,7 +73,10 @@ public class CommandManager implements Listener{
         for (Command command : commands) {
             CommandInfo info = command.getClass().getAnnotation(CommandInfo.class);
             if(info != null){
-                player.getMessager().send("&9/"+info.command()+" &e"+info.description());
+            	PlayerChat messager = player.getMessager();
+            	messager.send("&e----------------------------");
+            	messager.send("&9/"+info.command()+" &e"+info.description());
+            	messager.send("&e----------------------------");
             }
         }
     }
