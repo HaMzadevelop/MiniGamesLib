@@ -1,7 +1,9 @@
 package me.iHDeveloper.player;
 
 import me.iHDeveloper.debug.Debug;
+
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 
 
 public class PlayerCreator {
@@ -38,6 +40,12 @@ class PlayerCreateItem implements Player{
     public String getName() {
         return p.getName();
     }
+
+
+	@Override
+	public Location getLocation() {
+		return p.getLocation();
+	}
     
 }
 class PlayerCreateMessager implements PlayerChat{
@@ -58,4 +66,10 @@ class PlayerCreateMessager implements PlayerChat{
     private static String color(String format){
         return ChatColor.translateAlternateColorCodes('&', format);
     }
+
+
+	@Override
+	public void sendSub() {
+		send("&e&l━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+	}
 }

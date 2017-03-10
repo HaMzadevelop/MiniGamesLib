@@ -27,7 +27,7 @@ public class CommandManager implements Listener{
         org.bukkit.entity.Player p = e.getPlayer();
         String message = e.getMessage();
         Debug.info("The "+p.getName()+" enter command "+message);
-        message = message.substring(0, message.length());
+        message = message.substring(1, message.length());
         List<String> args = new LinkedList<String>(Arrays.asList(message.split(" ")));
         if(args.size() > 0){
             String name = args.get(0);
@@ -54,12 +54,10 @@ public class CommandManager implements Listener{
             if(wanted == null){
                 showhelp(player);
                 e.setCancelled(true);
-                if(p.isOp()){
-                    e.setCancelled(false);
-                    return;
-                }
             }else{
-                boolean b = wanted.onCommand(player, args.toArray(new String[0]));
+            	String[] argsArray = args.toArray(new String[0]);
+            	Debug.info("The "+player.getName()+" Found the command");
+                boolean b = wanted.onCommand(player, argsArray);
                 if(!b){showhelp(player);}
                 e.setCancelled(true);
                 return;
@@ -70,15 +68,15 @@ public class CommandManager implements Listener{
     }
 
     protected static void showhelp(Player player) {
+    	PlayerChat messager = player.getMessager();
+        messager.sendSub();
         for (Command command : commands) {
             CommandInfo info = command.getClass().getAnnotation(CommandInfo.class);
             if(info != null){
-            	PlayerChat messager = player.getMessager();
-            	messager.send("&e----------------------------");
-            	messager.send("&9/"+info.command()+" &e"+info.description());
-            	messager.send("&e----------------------------");
+            	messager.send("&9/"+info.command()+" &a"+info.description());
             }
         }
+        messager.sendSub();
     }
     
 }
