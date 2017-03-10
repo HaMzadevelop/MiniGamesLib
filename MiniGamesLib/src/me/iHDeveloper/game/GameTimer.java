@@ -7,8 +7,6 @@ public interface GameTimer {
     
     public UUID runTimer(Runnable run, int ms);
     
-    public void stopTimer(UUID id);
-    
     public void pasueTimer(UUID id);
     
     public void resumeTimer(UUID id);

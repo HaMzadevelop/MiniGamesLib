@@ -7,6 +7,10 @@ public interface Game {
     
     public GameInfo getInfo();
     
+    public GameTimer getTimer();
+    
+    public GameScoreboard getScoreboard();
+    
     public int getId();
     
     public void start();
