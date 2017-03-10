@@ -12,6 +12,11 @@
 - [X] Player System*
 - [X] Settings System
 - [ ] API*
+- [ ] Utilities*
+ - [ ] Freaze*
+ - [ ] Damage*
+ - [X] Chat*
+ - [ ] Vanish*
 
 > #Config file
 >> ```
