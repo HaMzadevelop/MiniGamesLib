@@ -1,16 +1,17 @@
 # Task List
-- [ ] Game*
-- [ ] Arena/Maps*
+- [ ] Game* *UnderTesting*
+- [ ] Maps* **
 - [ ] Rewards*
 - [ ] Stats*
 - [ ] Shop*
 - [ ] Kits*
 - [ ] Updater*
 - [ ] Hologram*
-- [ ] AutoJoin*
-- [ ] PC System
-- [ ] Party System
-- [ ] Debug System*
+- [ ] AutoJoin*  
+- [X] Debug System*
+- [X] Player System*
+- [X] Settings System
+- [ ] API*
 
 > #Config file
 >> ```
