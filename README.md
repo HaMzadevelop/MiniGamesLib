@@ -1,6 +1,6 @@
 # Task List
-- [ ] Game* *UnderTesting*
-- [ ] Maps* **
+- [ ] Game* **UnderTesting**
+- [ ] Maps* **UnderTesting**
 - [ ] Rewards*
 - [ ] Stats*
 - [ ] Shop*
