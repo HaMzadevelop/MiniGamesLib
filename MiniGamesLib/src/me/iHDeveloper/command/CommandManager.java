@@ -73,7 +73,13 @@ public class CommandManager implements Listener{
         for (Command command : commands) {
             CommandInfo info = command.getClass().getAnnotation(CommandInfo.class);
             if(info != null){
-            	messager.send("&9/"+info.command()+" &a"+info.description());
+            	if(info.isOp()){
+            		if(player.getPlayer().isOp()){
+            			messager.send("&9/"+info.command()+" &a"+info.description());
+            		}
+            	}else{
+            		messager.send("&9/"+info.command()+" &a"+info.description());
+            	}
             }
         }
         messager.sendSub();

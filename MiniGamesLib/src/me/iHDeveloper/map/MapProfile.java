@@ -3,8 +3,12 @@ package me.iHDeveloper.map;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
 import me.iHDeveloper.MiniGamesLib;
+import me.iHDeveloper.debug.Debug;
 import me.iHDeveloper.tools.Settings;
+
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -64,6 +68,11 @@ public class MapProfile {
         return map;
     }
     
+    @Override
+    public String toString(){
+    	return "Map|"+map.getName();
+    }
+    
     public static void load(String name){
         File file = new File(MiniGamesLib.getDataPath()+"maps.yml");
         YamlConfiguration config = Settings.getConfig(file);
@@ -80,15 +89,25 @@ public class MapProfile {
                 profile.putSpawn(team, location);
             }
         }
-        
+        Debug.info("Loaded Map "+map.toString());
     }
     
     private static Location getFromConfig(YamlConfiguration config, String path){
         return (Location)config.get(path);
     }
     
-    public static void save(String name){
-        
+    public void save(String name){
+    	File file = new File(MiniGamesLib.getDataPath()+"maps.yml");
+        YamlConfiguration config = Settings.getConfig(file);
+        String path = "data."+name+".";
+        config.set(path+"wait", getWaitSpawn());
+        config.set(path+"spactate", getSpactateSpawn());
+        Set<String> teams = locations.keySet();
+        config.set(path+"spawns.list", teams);
+        for (String team : teams) {
+			config.set(path+"spawns."+team, getSpawn(team));
+		}
+        Debug.info("Saved Map "+toString());
     }
     
 }
