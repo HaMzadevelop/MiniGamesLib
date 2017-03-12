@@ -1,6 +1,9 @@
 package me.iHDeveloper.tools;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import me.iHDeveloper.debug.Debug;
 
@@ -21,6 +24,14 @@ public class Settings {
         	Debug.err(ex.getMessage());
         }
         return null;
+    }
+    
+    public static void save(File file, YamlConfiguration config){
+        try {
+            config.save(file);
+        } catch (IOException ex) {
+            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

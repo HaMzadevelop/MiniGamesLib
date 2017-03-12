@@ -32,6 +32,7 @@ public class TempleteData {
 		YamlConfiguration config = Settings.getConfig(file);
 		config.set("wait", waitSpawn);
 		config.set("spactate", spactateSpawn);
+                Settings.save(file, config);
 	}
 	
 }

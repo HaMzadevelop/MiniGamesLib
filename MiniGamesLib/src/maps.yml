@@ -1,0 +1,11 @@
+data:
+ default: # name
+  spawns:
+    list:
+    - team1
+    - team2
+    # here is the teams spawns or normal spawns
+  wait:
+    # here is the wait spawn locations
+  spactate:
+    # here is the spactate spawn
