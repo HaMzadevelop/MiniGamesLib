@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import me.iHDeveloper.debug.Debug;
+import me.iHDeveloper.map.MapAPI;
+
 public class GameCreator {
 
 	public static Game create(int id){
@@ -16,10 +19,16 @@ class GameCreatorItem implements Game{
 
 	private final GamePlayerList players;
 	private final GameInfo info;
+	private final GameRules rules;
+	private GameStatus status;
+	private final GameMap map;
 	
 	public GameCreatorItem(int id) {
 		this.info = new GameInfo(id);
 		this.players = new GamePlayerList();
+		this.rules = new GameRules();
+		this.map = new GameMap(this);
+		map.setup(MapAPI.get(0));
 	}
 	
 	@Override
@@ -39,12 +48,14 @@ class GameCreatorItem implements Game{
 
 	@Override
 	public void start() {
-		
+		Debug.info("Hosting game "+getId());
+		status = GameStatus.PRE_LOBBY;
+		GameManager.addGame(this); // Add game to the list
 	}
 
 	@Override
 	public void stop() {
-		
+		GameManager.removeGame(this); // Remove game from the list
 	}
 
 	@Override
@@ -62,12 +73,16 @@ class GameCreatorItem implements Game{
 	@Override
 	public GameStatus getStatus() {
 		// TODO Auto-generated method stub
-		return null;
+		return status;
 	}
 
 	@Override
 	public GameRules getRules() {
-		// TODO Auto-generated method stub
+		return rules;
+	}
+
+	@Override
+	public GameMap getMap() {
 		return null;
 	}
 	
@@ -79,6 +94,7 @@ class GameCreatorTimerItem implements GameTimer, Runnable{
 	
 	public GameCreatorTimerItem() {
 		public_id = UUID.randomUUID();
+		usedId = public_id;
 	}
 
 	@Override
@@ -106,15 +122,22 @@ class GameCreatorTimerItem implements GameTimer, Runnable{
 		timer.pasue = false;
 	}
 	
+	private UUID usedId = null;
+	
 	@Override
 	public void run() {
 		while(true){
-			
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(usedId.equals(public_id)){
+
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else{
+				Debug.info("Closed Game timer");
+				return;
 			}
 		}
 	}

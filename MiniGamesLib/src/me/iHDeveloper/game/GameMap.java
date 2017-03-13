@@ -39,7 +39,7 @@ public class GameMap {
 			Debug.err("&cError on copy map folder data");
 			return;
 		}
-        boolean isInstalled = Bukkit.unloadWorld(mapCopy.getPath(), false);
+        boolean isInstalled = false;
         if(!isInstalled){
             Debug.err("&cNot install &9"+mapFolder.getPath());
             return;

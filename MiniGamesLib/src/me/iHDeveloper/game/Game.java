@@ -15,6 +15,8 @@ public interface Game {
     
     public GameScoreboard getScoreboard();
     
+    public GameMap getMap();
+    
     public int getId();
     
     public void start();

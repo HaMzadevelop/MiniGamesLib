@@ -2,6 +2,7 @@ package me.iHDeveloper.game;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import me.iHDeveloper.player.Player;
 
  
@@ -21,6 +22,9 @@ public class GamePlayerList {
         list.remove(p);
     }
     
+    public boolean contains(Player player){
+    	return list.contains(player);
+    }
  
     public List<Player> get(){
         return list;

@@ -1,7 +1,9 @@
 package me.iHDeveloper.map;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class MapAPI {
@@ -24,6 +26,16 @@ public class MapAPI {
     
     public static Map get(String name){
         return maps.get(name);
+    }
+    
+    public static Map get(int i){
+    	Collection<Map> coll = maps.values();
+    	List<?> list;
+    	if (coll instanceof List)
+    	  list = (List<?>)coll;
+    	else
+    	  list = new ArrayList<>(coll);
+    	return (Map) list.get(i);
     }
     
     protected static void update(String name, Map map){
