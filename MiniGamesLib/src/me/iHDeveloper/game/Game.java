@@ -11,7 +11,7 @@ public interface Game {
     
     public GameStatus getStatus();
     
-    public GameRule getRule();
+    public GameRules getRules();
     
     public GameScoreboard getScoreboard();
     

@@ -24,7 +24,7 @@ public class GameMap {
     public void setup(Map map){
         this.map = map;
         File dataFolder = new File("Maps");
-        File mapFolder = new File("Maps//"+map.getName());
+        File mapFolder = new File("Maps//G"+game.getId()+"-"+map.getName().toUpperCase());
         File mapCopy = new File(map.getName());
         if(mapCopy.exists())
         	mapCopy.delete();
@@ -36,6 +36,8 @@ public class GameMap {
 			FileUtils.copyDirectory(mapFolder, mapCopy);
 		} catch (IOException e) {
 			e.printStackTrace();
+			Debug.err("&cError on copy map folder data");
+			return;
 		}
         boolean isInstalled = Bukkit.unloadWorld(mapCopy.getPath(), false);
         if(!isInstalled){

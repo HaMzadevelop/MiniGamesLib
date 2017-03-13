@@ -5,6 +5,7 @@ import java.util.Map;
 
 import me.iHDeveloper.command.CommandManager;
 import me.iHDeveloper.command.HelpCommand;
+import me.iHDeveloper.commands.MapCommand;
 import me.iHDeveloper.commands.SettingsCommand;
 import me.iHDeveloper.debug.Debug;
 import me.iHDeveloper.player.Player;
@@ -55,6 +56,7 @@ public class MiniGamesLib extends JavaPlugin implements Listener{
   private void addCommands(){
       CommandManager.addCommand(new HelpCommand());
       CommandManager.addCommand(new SettingsCommand());
+      CommandManager.addCommand(new MapCommand());
   }
   
   private void saveSettings(){

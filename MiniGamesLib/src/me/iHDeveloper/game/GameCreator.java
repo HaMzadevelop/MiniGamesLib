@@ -58,6 +58,18 @@ class GameCreatorItem implements Game{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public GameStatus getStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GameRules getRules() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 class GameCreatorTimerItem implements GameTimer, Runnable{
