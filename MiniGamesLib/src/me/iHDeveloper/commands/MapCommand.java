@@ -13,13 +13,18 @@ public class MapCommand extends Command{
 	public boolean onCommand(Player player, String[] args) {
 		PlayerChat messager = player.getMessager();
 		if(args.length == 2){
-			if(args[0].equalsIgnoreCase("create")){
-				String name = args[1];
+                    String name = args[1];
+                    if(args[0].equalsIgnoreCase("create")){
 				MapAPI.create(name);
+                                messager.send("&aComplete! &ecreate map &9"+name);
 				return true;
-			} else if(args[0].equalsIgnoreCase("remove")){
-				return true;
-			}
+                    } else if(args[0].equalsIgnoreCase("remove")){
+                        messager.send("&aComplete! &eremove map &9"+name);
+			return true;
+                    }else{
+                       messager.send("&cnot found the command! &btype &9/map help");
+                       return true;
+                    }
 		}
 		messager.sendSub();
 		messager.send("&9/map &ecreate &7<name>");

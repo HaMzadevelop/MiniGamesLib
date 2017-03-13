@@ -9,6 +9,10 @@ public interface Game {
     
     public GameTimer getTimer();
     
+    public GameStatus getStatus();
+    
+    public GameRule getRule();
+    
     public GameScoreboard getScoreboard();
     
     public int getId();
