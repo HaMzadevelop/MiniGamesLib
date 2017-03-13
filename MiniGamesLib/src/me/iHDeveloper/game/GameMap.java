@@ -1,8 +1,12 @@
 package me.iHDeveloper.game;
 
 import java.io.File;
+import java.io.IOException;
+
 import me.iHDeveloper.debug.Debug;
 import me.iHDeveloper.map.Map;
+
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
@@ -21,11 +25,19 @@ public class GameMap {
         this.map = map;
         File dataFolder = new File("Maps");
         File mapFolder = new File("Maps//"+map.getName());
+        File mapCopy = new File(map.getName());
+        if(mapCopy.exists())
+        	mapCopy.delete();
         if(!dataFolder.exists()){
             dataFolder.mkdir();
         if(!mapFolder.exists())
                 mapFolder.mkdir();
-        boolean isInstalled = Bukkit.unloadWorld(mapFolder.getPath(), false);
+        try {
+			FileUtils.copyDirectory(mapFolder, mapCopy);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        boolean isInstalled = Bukkit.unloadWorld(mapCopy.getPath(), false);
         if(!isInstalled){
             Debug.err("&cNot install &9"+mapFolder.getPath());
             return;
@@ -38,9 +50,18 @@ public class GameMap {
         this.world = world;
         Debug.info("&aInstalled map world in game id "+game.getId());
     }
+    }
     
     public World getWorld(){
         return world;
     }
-}
+    
+    public Game getGame(){
+    	return game;
+    }
+    
+    public Map getMap(){
+    	return map;
+    }
+    
 }
