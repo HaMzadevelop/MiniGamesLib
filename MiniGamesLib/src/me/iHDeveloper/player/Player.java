@@ -12,5 +12,11 @@ public interface Player {
     public Location getLocation();
     
     public String getName();
+
+	public String getDisplayName();
+	
+	public boolean isOp();
+	
+	public boolean hasPermission(String arg0);
     
 }

@@ -46,6 +46,24 @@ class PlayerCreateItem implements Player{
 	public Location getLocation() {
 		return p.getLocation();
 	}
+
+
+	@Override
+	public String getDisplayName() {
+		return p.getDisplayName();
+	}
+
+
+	@Override
+	public boolean isOp() {
+		return p.isOp();
+	}
+
+
+	@Override
+	public boolean hasPermission(String arg0) {
+		return p.hasPermission(arg0);
+	}
     
 }
 class PlayerCreateMessager implements PlayerChat{

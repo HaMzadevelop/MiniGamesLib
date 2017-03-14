@@ -3,12 +3,16 @@ package me.iHDeveloper.game;
 import java.io.File;
 import java.io.IOException;
 
+import me.iHDeveloper.MiniGamesLib;
 import me.iHDeveloper.debug.Debug;
 import me.iHDeveloper.map.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+
+import com.onarandombox.MultiverseCore.api.MultiverseWorld;
+import com.onarandombox.MultiverseCore.utils.WorldManager;
 
 
 public class GameMap {
@@ -24,7 +28,8 @@ public class GameMap {
     public void setup(Map map){
         this.map = map;
         File dataFolder = new File("Maps");
-        File mapFolder = new File("Maps//G"+game.getId()+"-"+map.getName().toUpperCase());
+        String path = "G"+game.getId()+"-"+map.getName().toUpperCase();
+        File mapFolder = new File(path);
         File mapCopy = new File(map.getName());
         if(mapCopy.exists())
         	mapCopy.delete();
@@ -39,7 +44,8 @@ public class GameMap {
 			Debug.err("&cError on copy map folder data");
 			return;
 		}
-        boolean isInstalled = false;
+        WorldManager wm = new WorldManager(MiniGamesLib.getMultiverseCore());
+        boolean isInstalled = wm.loadWorld(path);
         if(!isInstalled){
             Debug.err("&cNot install &9"+mapFolder.getPath());
             return;

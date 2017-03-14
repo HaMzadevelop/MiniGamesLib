@@ -28,5 +28,9 @@ public class GamePlayerList {
  
     public List<Player> get(){
         return list;
-    }    
+    }
+
+	public int size() {
+		return list.size();
+	}    
 }

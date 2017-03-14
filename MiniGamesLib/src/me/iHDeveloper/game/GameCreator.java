@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import me.iHDeveloper.debug.Debug;
 import me.iHDeveloper.map.MapAPI;
+import me.iHDeveloper.player.Player;
 
 public class GameCreator {
 
@@ -20,6 +21,8 @@ class GameCreatorItem implements Game{
 	private final GamePlayerList players;
 	private final GameInfo info;
 	private final GameRules rules;
+	private final GameScoreboard scoreboard;
+	private final GameSettings settings;
 	private GameStatus status;
 	private final GameMap map;
 	
@@ -28,6 +31,8 @@ class GameCreatorItem implements Game{
 		this.players = new GamePlayerList();
 		this.rules = new GameRules();
 		this.map = new GameMap(this);
+		this.scoreboard = new GameScoreboard(this);
+		this.settings = new GameSettings();
 		map.setup(MapAPI.get(0));
 	}
 	
@@ -60,19 +65,16 @@ class GameCreatorItem implements Game{
 
 	@Override
 	public GameTimer getTimer() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public GameScoreboard getScoreboard() {
-		// TODO Auto-generated method stub
-		return null;
+		return scoreboard;
 	}
 
 	@Override
 	public GameStatus getStatus() {
-		// TODO Auto-generated method stub
 		return status;
 	}
 
@@ -83,8 +85,33 @@ class GameCreatorItem implements Game{
 
 	@Override
 	public GameMap getMap() {
-		return null;
+		return map;
 	}
+
+	@Override
+	public void join(Player p) {
+		Debug.info(p.getName() + " join the game "+getId());
+		getPlayers().add(p);
+		getScoreboard().setup(p.getPlayer());
+		settings.setJoinMessage("&e[&6"+getPlayers().size()+"&e] "+p.getDisplayName() + " &ehas been joined!");
+	}
+
+	
+	
+	@Override
+	public void quit(Player p) {
+		Debug.info(p.getName() + " left from game "+getId());
+		getPlayers().delete(p);
+		for (Player player : getPlayers().get()) {
+			getScoreboard().setup(player.getPlayer());
+		}
+	}
+
+	@Override
+	public GameSettings getSettings() {
+		return settings;
+	}
+	
 	
 }
 class GameCreatorTimerItem implements GameTimer, Runnable{
